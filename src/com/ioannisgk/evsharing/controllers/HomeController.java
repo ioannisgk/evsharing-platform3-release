@@ -2,7 +2,11 @@ package com.ioannisgk.evsharing.controllers;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -330,6 +334,27 @@ public class HomeController {
 		// Add request statistics to the model
 		addRequestStatistics(theModel);
 		
+		
+		
+		
+		
+		int totalMinutes = 0;
+        
+        // Get all routes from the service
+        List<Route> acceptedRoutes = routeService.getRoutes();
+        
+        for (int i = 0; i < acceptedRoutes.size(); i++) {
+        	
+        	totalMinutes = totalMinutes +
+        							differenceInMinutes(acceptedRoutes.get(i).getStartTime(), acceptedRoutes.get(i).getEndTime());
+        	
+        }
+        
+        System.out.println("\nTOTAL TIME IN MINUTES: " + totalMinutes);
+		
+		
+		
+		
 		// Load main jsp page after login
 		return "dashboard";
 	}
@@ -571,5 +596,35 @@ public class HomeController {
      	theModel.addAttribute("acceptedRequests", theAcceptedRoutes.size());
      	theModel.addAttribute("deniedRequests", theDeniedRoutes.size());
      	theModel.addAttribute("efficiencyRatio", theEfficiencyRatio);
+	}
+	
+	// Method to calculate trip duration between two times in minutes
+	public int differenceInMinutes(String time1String, String time2String) {
+			
+		int diffMinutes = 0;
+		
+		try {
+			// Set specific time for calendar 1
+			
+			Date time1 = new SimpleDateFormat("HH:mm").parse(time1String);
+			Calendar calendar1 = Calendar.getInstance();
+		    calendar1.setTime(time1);
+		    
+		    // Set specific time for calendar 2
+		    
+		    Date time2 = new SimpleDateFormat("HH:mm").parse(time2String);
+		    Calendar calendar2 = Calendar.getInstance();
+		    calendar2.setTime(time2);
+		    
+		    // Find difference between two times in minutes
+		    
+			long diffSeconds = (calendar2.getTimeInMillis() - calendar1.getTimeInMillis()) / 1000;
+			diffMinutes = (int) (diffSeconds / 60);
+		    
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return diffMinutes;
 	}
 }

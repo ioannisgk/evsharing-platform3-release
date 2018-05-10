@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -55,6 +57,7 @@ public class ProcessRequestServiceShortImpl implements ProcessRequestService {
 	
 	// Method to process user request, get result and save new route to the database
 	public String requestResult(String currentMessage) {
+		
 		String result = "";
 		String userID = "";
 		String startStationID = "";

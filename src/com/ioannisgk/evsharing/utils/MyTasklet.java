@@ -107,11 +107,20 @@ public class MyTasklet implements Tasklet {
 		// STEP 1: Assign vehicles to stations with the highest traffic level //
 		////////////////////////////////////////////////////////////////////////
         
+        int currentStationId = 0;
+        
         // Assign vehicles to stations with the highest traffic level  
         for (int i = 0; i < countVehicles; i++) {
         	
-        	// Get each station id (the service gets stations by traffic level in desc order)
-        	int currentStationId = theStations.get(i).getId();
+        	if (i < countStations) {
+        	
+	        	// Get each station id (the service gets stations by traffic level in desc order)
+	        	currentStationId = theStations.get(i).getId();
+	        	
+        	} else {
+        		
+        		currentStationId = theStations.get(i - countStations).getId();
+        	}
         	
         	// Assign vehicles to stations with the highest traffic level
         	theVehicles.get(i).setStationId(currentStationId);
@@ -241,6 +250,8 @@ public class MyTasklet implements Tasklet {
         	
         	// Get message from each request and pass it to process request service
         	
+        	long start = System.currentTimeMillis();
+        	
         	for (int i = 0; i < theSimulationRequests.size(); i++) {
         		
         		// Process only simulation requests with a status that is not "Processed"
@@ -278,6 +289,9 @@ public class MyTasklet implements Tasklet {
 					System.out.println("Result:" + result);
         		}
         	}
+        	
+        	long time = System.currentTimeMillis() - start;
+	        System.out.println("\nTIME PASSED: " + time);
         }
         
 		//////////////////////////////////////////////////////////////////////////

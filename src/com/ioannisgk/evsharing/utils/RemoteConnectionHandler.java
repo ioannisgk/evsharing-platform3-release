@@ -84,13 +84,23 @@ public class RemoteConnectionHandler implements Runnable {
 				
 				if (currentMode.equals("shortMode")) {
 					
+					long start = System.currentTimeMillis();
+					
 					// Process request and get result
 					result = processRequestServiceShortImpl.requestResult(currentMessage);
 					
+					long time = System.currentTimeMillis() - start;
+			        System.out.println("\nTIME PASSED: " + time);
+					
 				} else if (currentMode.equals("longMode")) {
+					
+					long start = System.currentTimeMillis();
 					
 					// Process request and get result
 					result = processRequestServiceLongImpl.requestResult(currentMessage);
+					
+					long time = System.currentTimeMillis() - start;
+			        System.out.println("\nTIME PASSED: " + time);
 					
 				}
 				

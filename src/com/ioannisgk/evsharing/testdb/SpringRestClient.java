@@ -24,8 +24,8 @@ import com.ioannisgk.evsharing.entities.User;
   
 public class SpringRestClient {
   
-    public static final String REST_SERVICE_URI = "http://178.62.121.237:8080/evsharing-platform/api";
-    public static final String AUTH_SERVER_URI = "http://178.62.121.237:8080/evsharing-platform/oauth/token";
+    public static final String REST_SERVICE_URI = "http://178.62.121.237:8080/evsharing-platform3/api";
+    public static final String AUTH_SERVER_URI = "http://178.62.121.237:8080/evsharing-platform3/oauth/token";
     public static final String QPM_PASSWORD_GRANT = "?grant_type=password&username=evsharingUser&password=evsharingPass";
     public static final String QPM_ACCESS_TOKEN = "?access_token=";
  

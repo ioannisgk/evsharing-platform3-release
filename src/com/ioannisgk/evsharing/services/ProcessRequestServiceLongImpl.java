@@ -55,6 +55,7 @@ public class ProcessRequestServiceLongImpl implements ProcessRequestService {
 	
 	// Method to process user request, get result and save new route to the database
 	public String requestResult(String currentMessage) {
+		
 		String result = "";
 		String userID = "";
 		String startStationID = "";
